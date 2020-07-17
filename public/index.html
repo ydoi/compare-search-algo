@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="stylesheet" type="text/css" href="main.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+  <title>React Starter</title>
+</head>
+
+<body>
+  <!-- <div id="root"></div> -->
+  <div style="width: 1000px">
+    <p>nの値</p>
+    <input id="nCount" type="number" onchange="attachCount()" />
+    <canvas id="myChart"></canvas>
+  </div>
+  <noscript>
+    You need to enable JavaScript to run this app.
+  </noscript>
+  <script>
+    var ctx = document.getElementById('myChart').getContext('2d');
+    let n = 0;
+    const attachCount = () => {
+      n = document.getElementById('nCount').value;
+      chart.data.datasets[0].data = renierSearchComplexity(n);
+      chart.data.datasets[1].data = binarySearchComplexity(n);
+      console.log(chart.data.datasets[0].data)
+      chart.update();
+    }
+    const renierSearchComplexity = (n) => {
+      return [1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024].map(count => {
+        return  count * n;
+      })
+    }
+    const binarySearchComplexity = (n) => {
+      return [1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024].map((count, index) => {
+        const sortTime = n * Math.log2(n);
+        const searchTime = Math.log2(n) * count;
+        // console.log(Math.floor(sortTime + searchTime))
+        return Math.floor(sortTime + searchTime);
+      })
+    }
+    var chart = new Chart(ctx, {
+        // The type of chart we want to create
+        type: 'line',
+
+        // The data for our dataset
+        data: {
+            labels: [1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024],
+            datasets: [
+              {
+                label: 'Renier Search Complexity',
+                // backgroundColor: 'rgb(255, 99, 132)',
+                borderColor: 'red',
+                data: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+              },
+              {
+                label: 'Binary Search Complexity',
+                // backgroundColor: 'rgb(255, 255, 255)',
+                borderColor: 'blue',
+                data: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+              }
+          ]
+        },
+
+        // Configuration options go here
+        options: {
+          scales: {                          //軸設定
+                yAxes: [{                      //y軸設定
+                    display: true,             //表示設定
+                    scaleLabel: {              //軸ラベル設定
+                       display: true,          //表示設定
+                       labelString: '時間計算量(バイナリサーチはソート含)',  //ラベル
+                       fontSize: 18               //フォントサイズ
+                    },
+                    // ticks: {                      //最大値最小値設定
+                    //     min: 0,                   //最小値
+                    //     max: 30,                  //最大値
+                    //     fontSize: 18,             //フォントサイズ
+                    //     stepSize: 5               //軸間隔
+                    // },
+                }],
+                xAxes: [{                         //x軸設定
+                    display: true,                //表示設定
+                    // barPercentage: 0.4,           //棒グラフ幅
+                    // categoryPercentage: 0.4,      //棒グラフ幅
+                    scaleLabel: {                 //軸ラベル設定
+                       display: true,             //表示設定
+                       labelString: '検索回数',  //ラベル
+                       fontSize: 18               //フォントサイズ
+                    },
+                    // ticks: {
+                    //     fontSize: 18             //フォントサイズ
+                    // },
+                }],
+            },
+        }
+    });
+  </script>
+</body>
+
+</html>

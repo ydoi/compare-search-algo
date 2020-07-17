@@ -1,0 +1,27 @@
+.FrameDataTable__table {
+  border-collapse: collapse;
+}
+
+.FrameDataTable__table td {
+  padding: 0px;
+}
+
+.FrameDataTable__table th, td {
+  border: 1px solid black;
+}
+
+.Overall-frame__container {
+  display: flex;
+}
+
+.FrameData__table-span--generate {
+  background-color: aqua;
+}
+
+.FrameData__table-span--continuous {
+  background-color: orange;
+}
+
+.FrameData__table-span--stiffness {
+  background-color: red;
+}

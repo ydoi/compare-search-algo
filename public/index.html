@@ -29,13 +29,14 @@
       console.log(chart.data.datasets[0].data)
       chart.update();
     }
+    const searchCountArray = [1, 2, 4, 8, 16, 32, 64];
     const renierSearchComplexity = (n) => {
-      return [1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024].map(count => {
+      return searchCountArray.map(count => {
         return  count * n;
       })
     }
     const binarySearchComplexity = (n) => {
-      return [1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024].map((count, index) => {
+      return searchCountArray.map((count, index) => {
         const sortTime = n * Math.log2(n);
         const searchTime = Math.log2(n) * count;
         // console.log(Math.floor(sortTime + searchTime))
@@ -48,19 +49,19 @@
 
         // The data for our dataset
         data: {
-            labels: [1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024],
+            labels: searchCountArray,
             datasets: [
               {
                 label: 'Renier Search Complexity',
                 // backgroundColor: 'rgb(255, 99, 132)',
                 borderColor: 'red',
-                data: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+                data: searchCountArray.map((data, index) => { return index + 1 }),
               },
               {
                 label: 'Binary Search Complexity',
                 // backgroundColor: 'rgb(255, 255, 255)',
                 borderColor: 'blue',
-                data: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+                data: searchCountArray.map((data, index) => { return index + 1 }),
               }
           ]
         },
@@ -72,7 +73,7 @@
                     display: true,             //表示設定
                     scaleLabel: {              //軸ラベル設定
                        display: true,          //表示設定
-                       labelString: '時間計算量(バイナリサーチはソート含)',  //ラベル
+                       labelString: 'time complexity(+ sort for binary search)',  //ラベル
                        fontSize: 18               //フォントサイズ
                     },
                     // ticks: {                      //最大値最小値設定
@@ -88,7 +89,7 @@
                     // categoryPercentage: 0.4,      //棒グラフ幅
                     scaleLabel: {                 //軸ラベル設定
                        display: true,             //表示設定
-                       labelString: '検索回数',  //ラベル
+                       labelString: 'search count',  //ラベル
                        fontSize: 18               //フォントサイズ
                     },
                     // ticks: {
